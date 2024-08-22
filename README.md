@@ -12,10 +12,29 @@
 
 Welcome to the Nexus API documentation. This API provides endpoints for managing blog posts, comments, files, and photos. It's designed to be used as a backend for a content management system.
 
-Base URL: `http://your-api-domain.com/api/v1`
+Base URL: `https://nexus.crtl-prototype-studios.cn/api/v1`
+
+## Deployment
+
+You can clone this GitHub repository and build the Docker Image yourself. After building the image, you can deploy your instance of Nexus with the following Environment Variables:
+
+```dotenv
+DB_HOST=nexus.example.com
+DB_USER=exampleuser
+DB_PASSWORD=examplepassword
+DB_NAME=example
+DB_PORT=114514
+MINIO_ENDPOINT=0.0.0.1:114514
+MINIO_ACCESS_KEY=your-minio-access-key
+MINIO_SECRET_KEY=your-minio-secret-key
+
+# This option will forcefully migrate the schema to your database everytime you start this Go server.
+ENFORCE_SCHEMA_MIGRATION=true
+```
 
 ## Authentication
 
+Authentication functionality is currently unsupported and will be implemented later.
 [Note: Add authentication details here when implemented]
 
 ## Blog Posts

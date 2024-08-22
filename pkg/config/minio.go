@@ -11,7 +11,7 @@ func InitMinIO() (*minio.Client, error) {
 	endpoint := os.Getenv("MINIO_ENDPOINT")
 	accessKeyID := os.Getenv("MINIO_ACCESS_KEY")
 	secretAccessKey := os.Getenv("MINIO_SECRET_KEY")
-	useSSL := false // Set to true if your MinIO server uses SSL
+	useSSL := false
 
 	// Initialize MinIO client
 	minioClient, err := minio.New(endpoint, &minio.Options{

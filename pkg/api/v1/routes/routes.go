@@ -4,7 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/minio/minio-go/v7"
 	"gorm.io/gorm"
-	"nexus/pkg/api/handlers"
+	"nexus/pkg/api/v1/handlers"
 )
 
 func SetupRoutes(router *gin.Engine, db *gorm.DB, minioClient *minio.Client) {

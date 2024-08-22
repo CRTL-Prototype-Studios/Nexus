@@ -3,7 +3,7 @@ package handlers
 import (
 	"github.com/minio/minio-go/v7"
 	"net/http"
-	"nexus/pkg/api/models"
+	models2 "nexus/pkg/api/v1/models"
 
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
@@ -15,7 +15,7 @@ type Handler struct {
 }
 
 func (h *Handler) CreateBlogPost(c *gin.Context) {
-	var blogPost models.BlogPost
+	var blogPost models2.BlogPost
 	if err := c.ShouldBindJSON(&blogPost); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
@@ -30,7 +30,7 @@ func (h *Handler) CreateBlogPost(c *gin.Context) {
 }
 
 func (h *Handler) GetBlogPosts(c *gin.Context) {
-	var blogPosts []models.BlogPost
+	var blogPosts []models2.BlogPost
 	if err := h.DB.Find(&blogPosts).Error; err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to fetch blog posts"})
 		return
@@ -42,7 +42,7 @@ func (h *Handler) GetBlogPosts(c *gin.Context) {
 // Add similar functions for Photo and Post CRUD operations
 
 func (h *Handler) AddComment(c *gin.Context) {
-	var comment models.Comment
+	var comment models2.Comment
 	if err := c.ShouldBindJSON(&comment); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return

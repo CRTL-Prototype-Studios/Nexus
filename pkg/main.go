@@ -2,7 +2,7 @@ package main
 
 import (
 	"log"
-	"nexus/pkg/api/routes"
+	"nexus/pkg/api/v1/routes"
 	"nexus/pkg/config"
 	"nexus/pkg/database"
 

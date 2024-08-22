@@ -17,7 +17,7 @@ func (h *Handler) AddComment(c *gin.Context) {
 	}
 
 	// Validate that either BlogPostID or PostID is provided, but not both
-	if (comment.BlogPostID == nil && comment.PostID == nil) || (comment.BlogPostID != nil && comment.PostID != nil) {
+	if (comment.BlogPostID == nil) || (comment.BlogPostID != nil) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Exactly one of BlogPostID or PostID must be provided"})
 		return
 	}
@@ -27,12 +27,6 @@ func (h *Handler) AddComment(c *gin.Context) {
 		var blogPost models.BlogPost
 		if err := h.DB.First(&blogPost, *comment.BlogPostID).Error; err != nil {
 			c.JSON(http.StatusNotFound, gin.H{"error": "Associated blog post not found"})
-			return
-		}
-	} else {
-		var post models.Post
-		if err := h.DB.First(&post, *comment.PostID).Error; err != nil {
-			c.JSON(http.StatusNotFound, gin.H{"error": "Associated post not found"})
 			return
 		}
 	}

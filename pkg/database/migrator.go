@@ -6,7 +6,6 @@ import (
 )
 
 var AutoMaintainRange = []any{
-	&models2.Post{},
 	&models2.Photo{},
 	&models2.Comment{},
 	&models2.BlogPost{},

@@ -21,7 +21,7 @@ Base URL: `http://your-api-domain.com/api/v1`
 ## Blog Posts
 
 ### Create a Blog Post
-- **POST** `/blogposts`
+- **POST** `/blog`
 - **Body**:
   ```json
   {
@@ -33,18 +33,18 @@ Base URL: `http://your-api-domain.com/api/v1`
 - **Response**: Returns the created blog post object
 
 ### Get All Blog Posts
-- **GET** `/blogposts`
+- **GET** `/blog`
 - **Query Parameters**:
     - `page` (optional): Page number for pagination (default: 1)
     - `pageSize` (optional): Number of items per page (default: 10)
 - **Response**: Returns an array of blog post objects
 
 ### Get a Specific Blog Post
-- **GET** `/blogposts/:id`
+- **GET** `/blog/:id`
 - **Response**: Returns the specified blog post object
 
 ### Update a Blog Post
-- **PUT** `/blogposts/:id`
+- **PUT** `/blog/:id`
 - **Body**:
   ```json
   {
@@ -56,7 +56,7 @@ Base URL: `http://your-api-domain.com/api/v1`
 - **Response**: Returns the updated blog post object
 
 ### Delete a Blog Post
-- **DELETE** `/blogposts/:id`
+- **DELETE** `/blog/:id`
 - **Response**: Returns a success message
 
 ## Comments

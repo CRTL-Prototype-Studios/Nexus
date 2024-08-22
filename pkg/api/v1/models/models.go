@@ -18,14 +18,6 @@ type Comment struct {
 	Content    string    `json:"content"`
 	BlogPostID *uint     `json:"blogPostID"`
 	BlogPost   *BlogPost `json:"blogPost" gorm:"foreignKey:BlogPostID"`
-	PostID     *uint     `json:"postID"`
-	Post       *Post     `json:"post" gorm:"foreignKey:PostID"`
-}
-
-type Post struct {
-	BaseModel
-	Content  string    `json:"content"`
-	Comments []Comment `json:"comments"`
 }
 
 type Album struct {

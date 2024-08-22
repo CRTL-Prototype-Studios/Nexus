@@ -3,8 +3,8 @@ package routes
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/minio/minio-go/v7"
-	"github.com/yourusername/mywebsite-backend/api/handlers"
 	"gorm.io/gorm"
+	"nexus/pkg/api/handlers"
 )
 
 func SetupRoutes(router *gin.Engine, db *gorm.DB, minioClient *minio.Client) {

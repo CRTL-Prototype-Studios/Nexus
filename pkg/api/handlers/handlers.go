@@ -1,10 +1,11 @@
 package handlers
 
 import (
+	"github.com/minio/minio-go/v7"
 	"net/http"
+	"nexus/pkg/api/models"
 
 	"github.com/gin-gonic/gin"
-	"github.com/yourusername/mywebsite-backend/api/models"
 	"gorm.io/gorm"
 )
 

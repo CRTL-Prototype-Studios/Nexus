@@ -2,6 +2,8 @@ package main
 
 import (
 	"log"
+	"nexus/pkg/api/routes"
+	"nexus/pkg/config"
 
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"

@@ -9,6 +9,7 @@ type BlogPost struct {
 	Title    string
 	Content  string
 	Comments []Comment
+	Cover    Photo
 }
 
 type Photo struct {
@@ -22,7 +23,6 @@ type Photo struct {
 type Post struct {
 	gorm.Model
 	Content  string
-	ImageURL string
 	Comments []Comment
 }
 

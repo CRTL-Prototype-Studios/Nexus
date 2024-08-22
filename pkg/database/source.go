@@ -9,7 +9,7 @@ import (
 
 var Inst *gorm.DB
 
-func NewSource() error {
+func InitalizeDatabase() error {
 	var err error
 
 	dbHost, dbUser, dbPassword, dbName, dbPort :=

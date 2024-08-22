@@ -12,8 +12,6 @@
 
 Welcome to the Nexus API documentation. This API provides endpoints for managing blog posts, comments, files, and photos. It's designed to be used as a backend for a content management system.
 
-Base URL: `https://nexus.crtl-prototype-studios.cn/api/v1`
-
 ## Deployment
 
 You can clone this GitHub repository and build the Docker Image yourself. After building the image, you can deploy your instance of Nexus with the following Environment Variables:

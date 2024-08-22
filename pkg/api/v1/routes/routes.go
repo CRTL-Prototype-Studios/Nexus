@@ -18,13 +18,21 @@ func SetupRoutes(router *gin.Engine, db *gorm.DB, minioClient *minio.Client) {
 		v1.GET("/blog/:id", h.GetBlogPost)
 		v1.PUT("/blog/:id", h.UpdateBlogPost)
 
-		// Photo routes
-		// v1.POST("/photo", h.CreatePhoto)
-		// v1.GET("/photo", h.GetPhotos)
+		v1.POST("/files", h.UploadFile)
+		v1.GET("/files", h.ListFiles)
+		v1.GET("/files/*path", h.GetFileByPath)
+		v1.PUT("/files/:id", h.UpdateFile)
+		v1.DELETE("/files/:id", h.DeleteFile)
 
-		// Post routes
-		// v1.POST("/post", h.CreatePost)
-		// v1.GET("/post", h.GetPosts)
+		// Photo routes
+		v1.POST("/photos", h.CreatePhoto)
+		v1.GET("/photos/:id", h.GetPhoto)
+		v1.PUT("/photos/:id", h.UpdatePhoto)
+		v1.DELETE("/photos/:id", h.DeletePhoto)
+		v1.GET("/photos", h.ListPhotos)
+
+		// Directory routes
+		v1.POST("/directories", h.CreateDirectory)
 
 		// Comment routes
 		v1.POST("/comments", h.AddComment)

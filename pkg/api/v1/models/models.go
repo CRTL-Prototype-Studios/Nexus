@@ -1,5 +1,9 @@
 package models
 
+import (
+	"time"
+)
+
 type BlogPost struct {
 	BaseModel
 	Title    string    `json:"title"`
@@ -18,17 +22,6 @@ type Comment struct {
 	Post       *Post     `json:"post" gorm:"foreignKey:PostID"`
 }
 
-type Photo struct {
-	BaseModel
-	Title        string `json:"title"`
-	Description  string `json:"description"`
-	Aperture     int8   `json:"aperture"`
-	ShutterSpeed int8   `json:"shutter_speed"`
-	ISO          int16  `json:"iso"`
-	Lens         string `json:"lens"`
-	ImageURL     string `json:"image_url"`
-}
-
 type Post struct {
 	BaseModel
 	Content  string    `json:"content"`
@@ -39,4 +32,25 @@ type Album struct {
 	BaseModel
 	Name   string  `json:"name"`
 	Photos []Photo `json:"photos" gorm:"many2many:album_photos;"`
+}
+
+type File struct {
+	BaseModel
+	Name        string    `json:"name"`
+	Path        string    `json:"path"`
+	Size        int64     `json:"size"`
+	URL         string    `json:"url"`
+	ContentType string    `json:"contentType"`
+	UploadedAt  time.Time `json:"uploadedAt"`
+	IsDirectory bool      `json:"isDirectory"`
+}
+
+type Photo struct {
+	BaseModel
+	Title       string `json:"title"`
+	Description string `json:"description"`
+	FileID      uint   `json:"fileID"`
+	File        File   `json:"file" gorm:"foreignKey:FileID"`
+	Width       int    `json:"width"`
+	Height      int    `json:"height"`
 }

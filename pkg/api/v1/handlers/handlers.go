@@ -8,4 +8,5 @@ import (
 type Handler struct {
 	DB          *gorm.DB
 	MinioClient *minio.Client
+	BucketName  string
 }

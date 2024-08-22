@@ -11,7 +11,7 @@ COPY go.mod ./
 RUN go mod download
 
 # Copy the source from the current directory to the Working Directory inside the container
-COPY pkg .
+COPY pkg ./
 
 # Build the Go app
 RUN go build -o main ./pkg/main.go

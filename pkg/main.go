@@ -4,6 +4,7 @@ import (
 	"log"
 	"nexus/pkg/api/routes"
 	"nexus/pkg/config"
+	"nexus/pkg/database"
 
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
@@ -15,9 +16,10 @@ func main() {
 		log.Fatal("Error loading .env file")
 	}
 
-	db, err := config.InitDB()
-	if err != nil {
-		log.Fatal("Error connecting to config: ", err)
+	if err = database.NewSource(); err != nil {
+		log.Fatal("Error initializing PostgreSQL Database Instance: ", err)
+	} else if err := database.RunMigration(database.Inst); err != nil {
+		log.Fatal("Error running database migration to PostgreSQL Database: ", err)
 	}
 
 	minioClient, err := config.InitMinIO()
@@ -27,7 +29,7 @@ func main() {
 
 	router := gin.Default()
 
-	routes.SetupRoutes(router, db, minioClient)
+	routes.SetupRoutes(router, database.Inst, minioClient)
 
 	err = router.Run(":8080")
 	if err != nil {

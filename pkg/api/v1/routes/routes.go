@@ -13,34 +13,57 @@ func SetupRoutes(router *gin.Engine, db *gorm.DB, minioClient *minio.Client) {
 	v1 := router.Group("/api/v1")
 	{
 		// Blog routes
-		v1.POST("/blog", h.CreateBlogPost)
-		v1.GET("/blog", h.GetBlogPosts)
-		v1.GET("/blog/:id", h.GetBlogPost)
-		v1.PUT("/blog/:id", h.UpdateBlogPost)
+		blog := v1.Group("/blog")
+		{
+			blog.POST("/", h.CreateBlogPost)
+			blog.GET("/", h.GetBlogPosts)
+			blog.GET("/:id", h.GetBlogPost)
+			blog.PUT("/:id", h.UpdateBlogPost)
+		}
 
-		v1.POST("/files", h.UploadFile)
-		v1.GET("/files", h.ListFiles)
-		v1.GET("/files/*path", h.GetFileByPath)
-		v1.PUT("/files/:id", h.UpdateFile)
-		v1.DELETE("/files/:id", h.DeleteFile)
+		files := v1.Group("/files")
+		{
+			files.POST("/", h.UploadFile)
+			files.GET("/", h.ListFiles)
+			files.GET("/*path", h.GetFileByPath)
+			files.PUT("/:id", h.UpdateFile)
+			files.DELETE("/:id", h.DeleteFile)
+		}
 
-		// Photo routes
-		v1.POST("/photos", h.CreatePhoto)
-		v1.GET("/photos/:id", h.GetPhoto)
-		v1.PUT("/photos/:id", h.UpdatePhoto)
-		v1.DELETE("/photos/:id", h.DeletePhoto)
-		v1.GET("/photos", h.ListPhotos)
+		photos := v1.Group("/photos")
+		{
+			// Photo routes
+			photos.POST("/", h.CreatePhoto)
+			photos.GET("/:id", h.GetPhoto)
+			photos.PUT("/:id", h.UpdatePhoto)
+			photos.DELETE("/:id", h.DeletePhoto)
+			photos.GET("/", h.ListPhotos)
+		}
+
+		albums := router.Group("/albums")
+		{
+			albums.POST("/", h.CreateAlbum)
+			albums.GET("/", h.ListAlbums)
+			albums.GET("/:id", h.GetAlbum)
+			albums.PUT("/:id", h.UpdateAlbum)
+			albums.DELETE("/:id", h.DeleteAlbum)
+			albums.POST("/:id/photos", h.AddPhotoToAlbum)
+			albums.DELETE("/:id/photos/:photoID", h.RemovePhotoFromAlbum)
+		}
 
 		// Directory routes
 		v1.POST("/directories", h.CreateDirectory)
 
 		// Comment routes
-		v1.POST("/comments", h.AddComment)
-		v1.GET("/comments", h.GetComments)
-		v1.DELETE("/comments/:id", h.DeleteComment)
-		v1.PUT("/comments/:id", h.UpdateComment)
+		comments := v1.Group("/comments")
+		{
+			comments.POST("/", h.AddComment)
+			comments.GET("/", h.GetComments)
+			comments.DELETE("/:id", h.DeleteComment)
+			comments.PUT("/:id", h.UpdateComment)
+		}
 
 		// File upload route
-		v1.POST("/upload", h.UploadFile)
+		// v1.POST("/upload", h.UploadFile)
 	}
 }

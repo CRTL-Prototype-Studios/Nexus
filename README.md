@@ -336,7 +336,3 @@ All endpoints will return appropriate HTTP status codes:
 - 500: Internal server error
 
 Error responses will include a JSON object with an "error" field describing the issue.
-
-## Rate Limiting
-
-[Note: Add rate limiting details here when implemented]

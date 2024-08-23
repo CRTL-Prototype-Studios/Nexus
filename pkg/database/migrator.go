@@ -2,16 +2,26 @@ package database
 
 import (
 	"gorm.io/gorm"
-	models2 "nexus/pkg/api/v1/models"
+	"nexus/pkg/api/v1/models"
 )
 
 var AutoMaintainRange = []any{
-	&models2.Photo{},
-	&models2.Comment{},
-	&models2.BlogPost{},
+	&models.Photo{},
+	&models.Comment{},
+	&models.BlogPost{},
+	&models.Album{},
+	&models.Role{},
+	&models.File{},
+	&models.Permission{},
+	&models.User{},
 }
 
 func RunMigration(source *gorm.DB) error {
+	// Enable UUID extension
+	if err := source.Exec("CREATE EXTENSION IF NOT EXISTS \"uuid-ossp\";").Error; err != nil {
+		return err
+	}
+
 	if err := source.AutoMigrate(
 		AutoMaintainRange...,
 	); err != nil {

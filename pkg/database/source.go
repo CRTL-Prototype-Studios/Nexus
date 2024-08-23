@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
+	"log"
 	"os"
 )
 
@@ -19,9 +20,15 @@ func InitalizeDatabase() error {
 		os.Getenv("DB_NAME"),
 		os.Getenv("DB_PORT")
 
-	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable TimeZone=UTC",
+	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable TimeZone=Asia/Shanghai",
 		dbHost, dbUser, dbPassword, dbName, dbPort)
 
 	Inst, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
-	return err
+	if err != nil {
+		log.Printf("Failed to connect to database: %v", err)
+		return err
+	}
+
+	log.Println("Successfully connected to the database")
+	return nil
 }

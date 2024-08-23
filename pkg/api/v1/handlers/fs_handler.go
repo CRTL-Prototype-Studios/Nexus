@@ -5,6 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
 	"github.com/minio/minio-go/v7"
+	"mime/multipart"
 	"net/http"
 	"nexus/pkg/api/v1/models"
 	"path/filepath"
@@ -83,7 +84,12 @@ func (h *Handler) UploadFile(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	defer file.Close()
+	defer func(file multipart.File) {
+		err := file.Close()
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to upload file from unable to close file writing"})
+		}
+	}(file)
 
 	path := c.DefaultPostForm("path", "")
 	isDirectory := c.DefaultPostForm("isDirectory", "false") == "true"

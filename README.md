@@ -202,6 +202,57 @@ Authentication functionality is currently unsupported and will be implemented la
 - **DELETE** `/photos/:id`
 - **Response**: Returns a success message
 
+## Albums
+
+### Create an Album
+- **POST** `/albums`
+- **Body**:
+  ```json
+  {
+    "name": "My New Album"
+  }
+  ```
+- **Response**: Returns the created album object
+
+### Get All Albums
+- **GET** `/albums`
+- **Query Parameters**:
+  - `page` (optional): Page number for pagination (default: 1)
+  - `pageSize` (optional): Number of items per page (default: 10)
+- **Response**: Returns an array of album objects
+
+### Get a Specific Album
+- **GET** `/albums/:id`
+- **Response**: Returns the specified album object with associated photos
+
+### Update an Album
+- **PUT** `/albums/:id`
+- **Body**:
+  ```json
+  {
+    "name": "Updated Album Name"
+  }
+  ```
+- **Response**: Returns the updated album object
+
+### Delete an Album
+- **DELETE** `/albums/:id`
+- **Response**: Returns a success message
+
+### Add a Photo to an Album
+- **POST** `/albums/:id/photos`
+- **Body**:
+  ```json
+  {
+    "photoID": 123
+  }
+  ```
+- **Response**: Returns a success message
+
+### Remove a Photo from an Album
+- **DELETE** `/albums/:id/photos/:photoID`
+- **Response**: Returns a success message
+
 ## Error Handling
 
 All endpoints will return appropriate HTTP status codes:
@@ -217,7 +268,3 @@ Error responses will include a JSON object with an "error" field describing the 
 ## Rate Limiting
 
 [Note: Add rate limiting details here when implemented]
-
-## Changelog
-
-[Note: Add changelog entries here as you update the API]
